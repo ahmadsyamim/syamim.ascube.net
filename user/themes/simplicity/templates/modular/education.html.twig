@@ -1,0 +1,12 @@
+<article class="modular modular-education">
+    {% if page.header.showtitle %}<h2 class="heading">{{ page.header.title }}</h2>{% endif %}
+    <div class="content">
+        {% for edu in page.header.education %}
+            <div>
+                <i class="fas fa-graduation-cap"></i> <strong>{{ edu.name }}</strong>
+                <span class="desc">{{ edu.school }} <small>({{ edu.date }})</small></span>
+            </div>
+        {% endfor %}
+    </div>
+
+</article>

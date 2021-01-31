@@ -1,0 +1,57 @@
+{% macro pageLinkName(text) %}{{ text|lower|replace({' ':'_'}) }}{% endmacro %}
+
+{% macro nav_loop(pages, modular, nested) %}
+  {% import _self as macros %}
+  {% for p in pages %}
+    {% if p.visible or (p.modular and p.header.visible is not same as (false)) %}
+      {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
+      <li>
+        {% set href = '' %}
+        {% set internal = '' %}
+        {% if modular %}
+          {% set internal = p.parent.active ? 'internal' : '' %}
+          {% set href = p.parent.url ~ '#' ~ macros.pageLinkName(p.menu) %}
+        {% else %}
+          {% set href = p.url %}
+        {% endif %}
+        <a class="{{ active_page }} {{ internal }}" href="{{ href }}">{{ p.menu }}</a>
+
+        {% set show_modules = p.header.modules_in_menu and p.collection.modular.count > 0 %}
+        {% set show_children = p.children.visible.count > 0 %}
+
+        {% if not nested and (show_modules or show_children) %}
+          <button class="nav__dropdown">
+            <i class="nav__dropdown__icon fas fa-chevron-down"></i>
+          </button>
+        {% endif %}
+
+        {% if show_modules %}
+          <ul>
+          {{ macros.nav_loop(p.collection.modular, true, true) }}
+          </ul>
+        {% endif %}
+        {% if show_children %}
+          <ul>
+          {{ macros.nav_loop(p.children.visible, false, true) }}
+          </ul>
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro icon_link(url, icon_classes) %}
+  <a href="{{ url }}" target="_blank">
+      <i class="{{ icon_classes }}"></i>
+  </a>
+{% endmacro %}
+
+{% macro link_loop(show_links, links) %}
+  {% if show_links %}
+    {% for l in links %}
+      <li>        
+        <a href="{{ l.link }}">{{ l.text }}</a>
+      </li>
+    {% endfor %}
+  {% endif %}
+{% endmacro %}

@@ -1,0 +1,31 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<section class="blog-post">
+    <section class="container">
+        <section class="blog-post__header {{ header.header_classes }}">
+            <h1 class="blog-post__header__title">{{ header.title }}</h1>
+            <div class="blog-post__header__date">
+                {% set date_format = page.dateformat ? page.dateformat : system.pages.dateformat.short %}
+                {% set published = page.publishDate|date(date_format) %}
+                {% set date = page.date|date(date_format) %}
+
+                {% if page.header.publish_date and published is not same as(date) %}
+                    {{ date }} 
+                    | Originally published {{ published }}
+                {% else %}
+                    {{ date }}
+                {% endif %}
+            </div>
+        </section>
+        <hr class="blog-post__divider" >
+        <section class="blog-post__content {{ header.content_classes }}">
+            {% set content_no_summary = content %}
+            {% if '===' in page.rawMarkdown %}
+                {% set content_no_summary = content|slice(page.summary|length) %}
+            {% endif %}
+            {{ content_no_summary|raw }}
+        </section>
+    </section>
+</section>
+{% endblock %}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
+<head>
+{% block head %}
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'partials/metadata.html.twig' %}
+
+    {% if config.theme.favicon %}
+        {% set favicon_img = media['image://webfolio/' ~ (config.theme.favicon|first).name] %}
+        {% if not favicon_img %}
+            {% set favicon_img = media['theme://images/' ~ (config.theme.favicon|first).name] %}
+        {% endif %}
+        <link rel="icon" type="image/png" href="{{ favicon_img.url }}" />
+    {% endif %}
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+{% endblock head%}
+
+{% block stylesheets %}
+    {% include 'partials/css-vars.html.twig' %}
+    {% do assets.addCss('theme://css/normalize.css', 98) %}
+    {% do assets.addCss('theme://css-compiled/theme.min.css', 98) %}
+    {% do assets.addCss('theme://css/custom.css', 98) %}
+    {% do assets.addCss('user://css/webfolio.css', 98) %}
+{% endblock %}
+
+{% block javascripts %}
+    {% do assets.addJs('jquery', 100) %}
+    {% do assets.addJs('theme://js/theme.js', 100) %}
+{% endblock %}
+
+{% block assets deferred %}
+    {{ assets.css()|raw }}
+    {{ assets.js()|raw }}
+{% endblock %}
+</head>
+<body id="top" class="{{ page.header.body_classes }}">
+
+{% block header %}
+    <header id="header" class="header">
+        <div class="header__content">
+            <div class="header__logo">
+                {% include 'partials/logo.html.twig' %}
+            </div>
+            
+            <nav class="nav--main__nav">
+            {% block header_navigation %}
+                {% include 'partials/nav.html.twig' %}
+            {% endblock %}
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <section id="body">
+        {% block content %}{% endblock %}
+    </section>
+{% endblock %}
+
+{% block footer %}
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+<button class="nav--mobile__toggle" id="nav-mobile-toggle">
+    <span class="top"></span>
+    <span class="middle"></span>
+    <span class="bottom"></span>
+</button>
+
+<div class="nav--mobile__overlay" id="nav-mobile-overlay">
+    <div class="nav--mobile__overlay__logo">
+        {% include 'partials/logo.html.twig' with {mobile: true} %}
+    </div>
+    <nav class="nav--mobile__nav">
+        {% block header_navigation_mobile %}
+            {% include 'partials/nav.html.twig' %}
+        {% endblock %}
+    </nav>
+</div>
+
+{% block bottom %}
+    {{ assets.js('bottom')|raw }}
+{% endblock %}
+
+</body>
+</html>

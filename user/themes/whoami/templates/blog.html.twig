@@ -1,0 +1,21 @@
+{% extends 'partials/base.html.twig' %}
+{% set collection = page.collection() %}
+
+{% block body %}
+
+<section class="page-content">
+    <div class="blog-container">
+    
+    <h3 class="modular_title">{{ page.title }}</h3>
+    
+        {% for child in collection %}
+            {% include 'partials/blog-list-item.html.twig' with {blog: page, page: child} %}
+        {% endfor %}
+        
+    </div>
+</section>
+    
+{% endblock %}
+
+
+

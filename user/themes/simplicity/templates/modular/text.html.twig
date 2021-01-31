@@ -1,0 +1,6 @@
+<article class="modular modular-text">
+    {% if page.header.showtitle %}<h2 class="heading">{{ page.header.title }}</h2>{% endif %}
+    <div class="content markdown">
+        {{ page.header.text | markdown }}
+    </div>
+</article>

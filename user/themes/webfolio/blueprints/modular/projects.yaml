@@ -1,0 +1,63 @@
+title: Projects
+'@extends': partials/module-base
+
+form:
+  fields:
+    tabs:
+      fields:
+        options:
+          fields:
+
+            projects:
+              type: section
+              title: Projects Options
+              fields:
+
+                header.projects_per_page:
+                  name: projects_per_page
+                  type: number
+                  label: Projects Per Page
+                  description: Number of projects to show initially and each time the "Show more" button is pressed. Leave empty to show all projects.
+
+                header.show_more_txt:
+                  name: show_more_txt
+                  type: text
+                  label: Show More Text
+                  description: Text for button to show more projects.
+                  default: Show more
+
+                header.projects:
+                  name: projects
+                  type: list
+                  label: Projects
+                  help: Project tiles to be shown after the page's Markdown content.
+                  fields:
+
+                    .title:
+                      type: text
+                      label: Title
+                      validate:
+                        type: textarea
+
+                    .image:
+                      type: filepicker
+                      label: Image
+                      folder: 'self@'
+                      preview_images: true
+                      description: Choose from an image uploaded to the Page Media section of the Content tab.
+                      accept:
+                        - .jpg
+                        - .jpeg
+                        - .png
+                        - .gif
+                        - .bmp
+                        - .svg
+
+                    .description:
+                      type: text
+                      label: Description
+                      
+                    .link:
+                      type: text
+                      label: Link to Project
+

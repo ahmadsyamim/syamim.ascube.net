@@ -1,0 +1,27 @@
+title: default
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        inhalt:
+          type: tab
+          title: THEME_SIMPLICITY.ADMIN.TAB.CONTENT
+          fields:
+            header.title:
+              type: text
+              autofocus: true
+              label: THEME_SIMPLICITY.ADMIN.FIELDS.TITLE.LABEL
+            content:
+              type: section
+              title: THEME_SIMPLICITY.ADMIN.SECTION.CONTENT
+              underline: true
+              fields:
+                content:
+                  type: markdown
+                  validate:
+                    type: textarea
+                header.media:
+                  type: pagemedia

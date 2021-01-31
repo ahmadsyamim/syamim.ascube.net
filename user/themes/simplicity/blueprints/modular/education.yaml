@@ -1,0 +1,64 @@
+title: education
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        inhalt:
+          type: tab
+          title: THEME_SIMPLICITY.ADMIN.TAB.CONTENT
+          fields:
+            header.title:
+              type: text
+              autofocus: true
+              label: THEME_SIMPLICITY.ADMIN.FIELDS.TITLE.LABEL
+            content:
+              type: section
+              title: THEME_SIMPLICITY.ADMIN.SECTION.CONTENT
+              underline: true
+              fields:
+                header.education:
+                  type: list
+                  label: THEME_SIMPLICITY.ADMIN.FIELDS.EDUCATION.LABEL
+                  fields:
+                    .name:
+                      type: text
+                      label: THEME_SIMPLICITY.ADMIN.FIELDS.EDUCATION.FIELDS.NAME.LABEL
+                      validate:
+                        required: true
+                    .school:
+                      type: text
+                      label: THEME_SIMPLICITY.ADMIN.FIELDS.EDUCATION.FIELDS.SCHOOL.LABEL
+                      validate:
+                        required: true
+                    .date:
+                      type: text
+                      label: THEME_SIMPLICITY.ADMIN.FIELDS.EDUCATION.FIELDS.DATE.LABEL
+                      markdown: true
+                      description: THEME_SIMPLICITY.ADMIN.FIELDS.EDUCATION.FIELDS.DATE.DESCRIPTION
+                      validate:
+                        required: true
+            settings:
+              type: section
+              title: THEME_SIMPLICITY.ADMIN.SECTION.SETTINGS
+              underline: true
+              fields:
+                header.showtitle:
+                  type: toggle
+                  label: THEME_SIMPLICITY.ADMIN.FIELDS.SHOWTITLE.LABEL
+                  highlight: 1
+                  default: 1
+                  options:
+                    0: THEME_SIMPLICITY.ADMIN.FIELDS.SHOWTITLE.OPTIONS.0
+                    1: THEME_SIMPLICITY.ADMIN.FIELDS.SHOWTITLE.OPTIONS.1
+                header.position:
+                  type: toggle
+                  label: THEME_SIMPLICITY.ADMIN.FIELDS.POSITION.LABEL
+                  highlight: main
+                  default: main
+                  options:
+                    main: THEME_SIMPLICITY.ADMIN.FIELDS.POSITION.OPTIONS.MAIN
+                    sidebar: THEME_SIMPLICITY.ADMIN.FIELDS.POSITION.OPTIONS.SIDEBAR
+                  description: THEME_SIMPLICITY.ADMIN.FIELDS.POSITION.DESCRIPTION

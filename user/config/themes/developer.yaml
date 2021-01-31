@@ -1,0 +1,48 @@
+enabled: true
+profile:
+  name: 'Ahmad Syamim Suhairi'
+  desc: 'Full-stack Software Engineer'
+  avatar_url: 'https://media-exp1.licdn.com/dms/image/C5103AQFaLRMfiRbY8g/profile-displayphoto-shrink_200_200/0/1544602607212?e=1617235200&v=beta&t=T5Cur4MZ9xgV0xkpxn9kADqGjwAF2aITIgUF5iPGY_Q'
+  informations:
+    -
+      icon: map-marker
+      label: Location
+      url: ''
+      text: 'Nagano, Japan'
+    -
+      icon: envelope-o
+      label: Email
+      url: 'mailto:ahmad.syamim@gmail.com'
+      text: ahmad.syamim@gmail.com
+    -
+      icon: link
+      label: Website
+      url: 'https://syamim.ascube.net'
+      text: 'https://syamim.ascube.net'
+github: ahmadsyamim
+# coderwall: tnajdek
+rss_feed:
+  url: 'http://feeds.feedburner.com/TechCrunch/startups'
+  limit: 3
+  effect: slideFastSynced
+linkedin: 'https://www.linkedin.com/in/ahmad-syamim-7ba4b7120'
+social:
+  networks:
+    -
+      url: 'https://www.linkedin.com/in/ahmad-syamim-7ba4b7120'
+      icon: linkedin
+      title: null
+    -
+      url: 'https://github.com/ahmadsyamim'
+      icon: github-alt
+      title: null
+    -
+      url: '#'
+      icon: twitter
+      title: null
+streams:
+  schemes:
+    theme:
+      type: ReadOnlyStream
+      paths:
+        - user/themes/developer

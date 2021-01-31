@@ -1,0 +1,63 @@
+{% set sidebar = pages.find('/sidebar') %}
+
+{% set sideon = header.sideon %}
+{% set fixedhead = theme_var('fixedhead') %}
+{% set headdescription = header.description %}
+{% set sidebar_headertitle =  sidebar.header.headertitle %}
+{% set sidebar_pageinheader =  sidebar.header.pageinheader %}
+{% set sidebar_mainphoto =  sidebar.header.mainphoto %}
+{% set sidebar_maintitle =  sidebar.header.maintitle %}
+{% set sidebar_maindescription =  sidebar.header.maindescription %}
+{% set sidebar_myactivityname =  sidebar.header.myactivityname %}
+{% set sidebar_myactivity =  sidebar.header.myactivity %}
+{% set sidebar_inworkusename =  sidebar.header.inworkusename %}
+{% set sidebar_inworkuse =  sidebar.header.inworkuse %}
+{% set sidebar_footertxt =  sidebar.header.footertxt %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+{% block head %}
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ headdescription }}" />
+    <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+    {% block stylesheets %}
+        {% do assets.addCss('theme://css/main.css') %}
+        {% do assets.addCss('theme://css/custom.css') %}
+    {% endblock %}
+    {{ assets.css() }}
+    {% block javascripts %}
+        {% do assets.addJs('jquery', 101) %}
+        {% do assets.addJs('theme://js/site.js', {group:'bottom'}) %}
+    {% endblock %}
+    {{ assets.js() }}
+{% endblock head %}
+</head>
+
+<body class="{% if sideon == 0 %}no-side{% endif %}">
+
+{% include 'partials/header.html.twig' %}
+
+<section class="content content_p1 {% if fixedhead == 1 %}fixedhead_padtop{% endif %}">
+    
+    {% if sideon == 1 %}
+        {% include 'partials/sidebar.html.twig' %}
+    {% endif %}
+    
+    {% block body %}
+        {% block content %}{% endblock %}
+    {% endblock %}
+    
+</section>
+
+{% include 'partials/footer.html.twig' %}
+
+{% block bottom %}
+    {{ assets.js('bottom') }}
+{% endblock %}
+
+</body>

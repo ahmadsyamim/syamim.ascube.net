@@ -1,0 +1,60 @@
+{% extends 'partials/base.html.twig' %}
+
+{% import 'macros/macros.html.twig' as macros %}
+
+{% set single_page_menu = header.single_page_menu %}
+{% if header.single_page_menu is null and header.modules_in_menu is null %}
+    {# need to check onpage_menu to preserve backwards compatibility with v1.0.0 #}
+    {% set single_page_menu = header.onpage_menu %}
+{% endif %}
+
+{% set on_page_nav = single_page_menu or header.modules_in_menu %}
+
+{% block javascripts %}
+    {% if on_page_nav %}
+        {% do assets.add('theme://js/singlepagenav.min.js') %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% block bottom %}
+    {{ parent() }}
+    {% if on_page_nav %}
+        <script>
+        // singlePageNav initialization & configuration
+        $('ul.navigation').singlePageNav({
+            offset: $('#header').outerHeight(),
+            filter: '.internal',
+            updateHash: false,
+            currentClass: 'active'
+        });
+        </script>
+    {% endif %}
+{% endblock %}
+
+{% block header_navigation %}
+    {% if single_page_menu %}
+        <ul class="navigation">
+            {{ macros.nav_loop(page.collection.modular, true, false) }}
+        </ul>
+    {% else %}
+    {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block header_navigation_mobile %}
+    {% if single_page_menu %}
+        <ul class="navigation">
+            {{ macros.nav_loop(page.collection.modular, true, false) }}
+        </ul>
+    {% else %}
+    {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% for module in page.collection() %}
+        <div id="{{ macros.pageLinkName(module.menu) }}"></div>
+        {{ module.content|raw }}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% import 'macros/macros.html.twig' as macros %}
+
+<ul class="navigation">
+    {{ macros.nav_loop(pages.children, false, false) }}
+    
+    {{ macros.link_loop(config.theme.show_external_links, config.theme.external_links) }}
+</ul>

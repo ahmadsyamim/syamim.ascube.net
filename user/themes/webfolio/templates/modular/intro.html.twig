@@ -1,0 +1,26 @@
+{% extends 'partials/module-base.html.twig' %}
+{% import 'macros/macros.html.twig' as macros %}
+
+{% set image = page.media.images|first %}
+{% block module_content %}
+    <div class="intro">
+        {% if image %}
+            {{ image.html('', page.header.img_alt, 'intro__img ' ~ page.header.img_style)|raw }}
+        {% endif %}
+
+        <div class="intro__content {% if image %} with-img {% endif %} {% if page.header.center_content %} center-text {% endif %}">
+            {{ content|raw }}
+            
+            <div class="intro__links">
+                {% if page.header.use_footer_links %} 
+                    {% for link in config.theme.footer_links %}
+                        {{ macros.icon_link(link.link, link.icon) }}
+                    {% endfor %}
+                {% endif %}
+                {% for link in page.header.links %}
+                    {{ macros.icon_link(link.link, link.icon) }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
